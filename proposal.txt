@@ -1,0 +1,16 @@
+Project Overview: 
+This project simulates the motion of particles in a three-dimensional vector field F(x,y,z)
+Each particle starts at an initial position and moves step-by-step according to the field's direction and magnitude.
+The program demonstartes how objects travel along the field's streamline - a concept i just learned in calc 3.
+
+Implementation: An std::map stores data from multiple particles. Each key is the particle's name (ex: "P1"), and each value is an std::array<std::list<double>, 3> that represents:
+  [0] x-coordinates over time
+  [1] y-coordinates over time
+  [2] z-coordinates over time
+Inital data (particle name and starting coordinaes) are read from field_data.txt, which will contain at least 100 lines.
+
+Simulated Events: At each time period the simulation updates positions using
+ r(t+1) = r(t) + F(x(t), y(t), z(t)) Δt
+where F(x, y, z) = (y, -x, z) and Δt = 0.1
+
+The driver shows the inital state and the changing positions of every particle for 25 time periods.
