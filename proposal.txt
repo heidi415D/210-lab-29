@@ -10,7 +10,7 @@ Implementation: An std::map stores data from multiple particles. Each key is the
 Inital data (particle name and starting coordinaes) are read from field_data.txt, which will contain at least 100 lines.
 
 Simulated Events: At each time period the simulation updates positions using
- r(t+1) = r(t) + F(x(t), y(t), z(t)) Δt
+ r(t+1) = r(t) + F(x(t), y(t), z(t)) Δt (need to check this!)
 where F(x, y, z) = (y, -x, z) and Δt = 0.1
 
 The driver shows the inital state and the changing positions of every particle for 25 time periods.
