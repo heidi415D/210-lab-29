@@ -5,7 +5,29 @@ I will write unit tests for two key functions: loadParticleData() and simulateVe
 1. loadParticleData()
    Objective: verify that data from text file is correctly inserted into the map
    Test Plan: 
-    a. create
-    b.
-    c.
-    d.
+    a. create a test file with three particles.
+    b. call loadParticleData() and verify that map.size() == 3
+    c. check that each particle has one x,y,z coord. in its lists
+    d. confirm the function prints an error if the file is missing
+
+    driver program: 
+    int main() {
+    map<string, array<list<double>,3>> testParticles;
+    loadParticleData(testParticles, "test_data.txt");
+
+    cout << "Particles loaded: " << testParticles.size() << endl;
+    for (auto& p : testParticles) {
+        cout << p.first << ": ("
+             << p.second[0].back() << ", "
+             << p.second[1].back() << ", "
+             << p.second[2].back() << ")\n";
+    }
+}
+
+2. simulateVectorField()
+    objective: verify that position updates occur correctly over time.
+    test plan:
+        a. create a map with one particle manually initialized to (1, 0, 0)
+        b. run simulateVectorField() for 1 timestep
+        c.check if new x,y,z values match expected updates
+        
