@@ -31,3 +31,20 @@ I will write unit tests for two key functions: loadParticleData() and simulateVe
         b. run simulateVectorField() for 1 timestep
         c.check if new x,y,z values match expected updates
         
+    driver program: 
+    int main() {
+    map<string, array<list<double>,3>> testParticles;
+    testParticles["P1"][0].push_back(1.0);
+    testParticles["P1"][1].push_back(0.0);
+    testParticles["P1"][2].push_back(0.0);
+
+    simulateVectorField(testParticles, 1, 0.1);
+
+    cout << "After 1 step:\n";
+    for (auto& p : testParticles) {
+        cout << p.first << ": ("
+             << p.second[0].back() << ", "
+             << p.second[1].back() << ", "
+             << p.second[2].back() << ")\n";
+    }
+}
