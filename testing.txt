@@ -1,0 +1,11 @@
+Unit testing description:
+
+I will write unit tests for two key functions: loadParticleData() and simulateVectorField()
+
+1. loadParticleData()
+   Objective: verify that data from text file is correctly inserted into the map
+   Test Plan: 
+    a. create
+    b.
+    c.
+    d.

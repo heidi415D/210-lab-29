@@ -26,7 +26,7 @@ using namespace std;
 
 
     // Display current particle data
-    void displayParticleData(const map<string, array<list<double>, 3>>& particles) {
+    void displayParticles(const map<string, array<list<double>, 3>>& particles) {
         for (const auto& pair : particles) {
             cout << p.first << ": ("
                  << p.second[0].back() << ", "
@@ -46,7 +46,7 @@ using namespace std;
                 double Fx = -y;
                 double Fy = x;
                 double Fz = z;
-                
+
                 //basic rule for alpha version
                 double x_new = x + y * dt;
                 double y_new = y - x * dt;
@@ -60,12 +60,14 @@ using namespace std;
 
     int main() {
         map<string, array<list<double>, 3>> particles;
-        loadParticleData(particles);
+        loadParticleData(particles, "field_data.txt");
 
-        cout << "Initial State:" << endl;
-        cout << "P1: (1.0, 0.0, 0.5)" << endl;
+        cout << "Initial State:\n";
+        displayParticles(particles);
 
-        simulate(particles, 25);
+        simulateVectorField(particles, 5, 0.1); 
+        cout << "\nAfter Simulation:\n";
+        displayParticles(particles);
 
         cout << "Simulation complete (mockup)." << endl;
     
