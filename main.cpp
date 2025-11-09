@@ -8,10 +8,33 @@
 using namespace std;
 
 // Loads particle names and inital positions from file
-void loadParticleData(map<string, array<list<double>, 3>>& particles, string filename) {
+    void loadParticleData(map<string, array<list<double>, 3>>& particles, string filename) {
     ifstream infile(filename);
     if (!infile.is_open()) {
-        cout << "Error opening file. Using mock data.." << endl;
+        cerr << "Error: Could not open file " << filename << endl;
+        return;
+    }
+        string name;
+        double x, y, z;
+        while (infile >> name >> x >> y >> z) {
+            particles[name][0].push_back(x);
+            particles[name][1].push_back(y);
+            particles[name][2].push_back(z);
+        }
+        infile.close();
+        }
+
+
+// Display current particle data
+    void displayParticleData(const map<string, array<list<double>, 3>>& particles) {
+        for (const auto& pair : particles) {
+            cout << p.first << ": ("
+                 << p.second[0].back() << ", "
+                 << p.second[1].back() << ", "
+                 << p.second[2].back() << ")" << endl;
+            }
+        }
+
         //mock entries
         particles["P1"][0].push_back(1.0);
         particles["P1"][1].push_back(0.0);
@@ -23,7 +46,8 @@ void loadParticleData(map<string, array<list<double>, 3>>& particles, string fil
 
         return;
 
-    }
+    
+
 
     // function to simulate vector field motion
     void simulate(map<string, array<list<double>,3>>& particles, int steps) {
@@ -48,13 +72,8 @@ int main() {
 }
 
 
-// include necessary headers for file handling, data structures
 
-// define a function to load particle data from an external file
-// parameters: map of particles, filename
-// try to open the file
-// if the file fails to open, print an error message
-// otherwise read particle name and starting x, y, z coordinates
+
 // insert those values into the map:
 // key = particle name
 // value = array of three lists for x, y, z coordinates
