@@ -7,7 +7,7 @@
 #include <cmath>
 using namespace std;
 
-// Loads particle names and inital positions from file
+    // Loads particle names and inital positions from file
     void loadParticleData(map<string, array<list<double>, 3>>& particles, string filename) {
     ifstream infile(filename);
     if (!infile.is_open()) {
@@ -25,7 +25,7 @@ using namespace std;
         }
 
 
-// Display current particle data
+    // Display current particle data
     void displayParticleData(const map<string, array<list<double>, 3>>& particles) {
         for (const auto& pair : particles) {
             cout << p.first << ": ("
@@ -35,40 +35,40 @@ using namespace std;
             }
         }
 
-        //mock entries
-        particles["P1"][0].push_back(1.0);
-        particles["P1"][1].push_back(0.0);
-        particles["P1"][2].push_back(0.5);
+// simple timestep update - not done yet
+    void simulateVectorField(map<string, array<list<double>,3>>& particles, int steps, double dt) {
+        for (int t = 1; t <= steps; ++t) {}
+            for (auto& p : particles) {
+                double x = p.second[0].back();
+                double y = p.second[1].back();
+                double z = p.second[2].back();
 
-        particles["P2"][0].push_back(-0.5);
-        particles["P2"][1].push_back(0.8);
-        particles["P2"][2].push_back(0.0);
+                double Fx = -y;
+                double Fy = x;
+                double Fz = z;
+                
+                //basic rule for alpha version
+                double x_new = x + y * dt;
+                double y_new = y - x * dt;
+                double z_new = z + z * dt;
 
-        return;
-
-    
-
-
-    // function to simulate vector field motion
-    void simulate(map<string, array<list<double>,3>>& particles, int steps) {
-    // NEEDTO: Implement full physics later
-    for (int t = 1; t <= steps; ++t) {
-        cout << "Simulating step " << t << "..." << endl;
-        // Ex dummy output
+                p.second[0].push_back(x_new);
+                p.second[1].push_back(y_new);
+                p.second[2].push_back(z_new);
+            }
     }
-}
 
-int main() {
-    map<string, array<list<double>, 3>> particles;
-    loadParticleData(particles);
+    int main() {
+        map<string, array<list<double>, 3>> particles;
+        loadParticleData(particles);
 
-    cout << "Initial State:" << endl;
-    cout << "P1: (1.0, 0.0, 0.5)" << endl;
+        cout << "Initial State:" << endl;
+        cout << "P1: (1.0, 0.0, 0.5)" << endl;
 
-    simulate(particles, 25);
+        simulate(particles, 25);
 
-    cout << "Simulation complete (mockup)." << endl;
-    return 0;
+        cout << "Simulation complete (mockup)." << endl;
+    
 }
 
 
