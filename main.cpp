@@ -27,6 +27,8 @@ using namespace std;
 
     // Display current particle data
     void displayParticles(const map<string, array<list<double>, 3>>& particles) {
+        cout << fixed << setprecision(2); // clean formatating
+        
         for (const auto& p : particles) {
             cout << p.first << ": ("
                  << p.second[0].back() << ", "
@@ -35,7 +37,7 @@ using namespace std;
             }
         }
 
-// simple timestep update - not done yet
+// simulate particle movement in a simple 3D vector field
     void simulateVectorField(map<string, array<list<double>,3>>& particles, int steps, double dt) {
         for (int t = 1; t <= steps; ++t) {
             for (auto& p : particles) {
@@ -43,14 +45,14 @@ using namespace std;
                 double y = p.second[1].back();
                 double z = p.second[2].back();
 
-                double Fx = -y;
-                double Fy = x;
+                double Fx = y;
+                double Fy = -x;
                 double Fz = z;
 
-                //basic rule for alpha version
-                double x_new = x + y * dt;
-                double y_new = y - x * dt;
-                double z_new = z + z * dt;
+                // basic rule 
+                double x_new = x + Fx * dt;
+                double y_new = y + Fy * dt;
+                double z_new = z + Fz * dt;
 
                 p.second[0].push_back(x_new);
                 p.second[1].push_back(y_new);

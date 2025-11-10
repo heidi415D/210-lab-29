@@ -20,4 +20,11 @@ Fix: removed the extra braces so that particles updates occur within the time lo
 
 -----------------------------------------------
 
-Bug #3:
+Bug #3: Incorrect Fx/Fy sign direciton
+
+Symptom: Particles rotated opposide of motion I wanted
+
+Fix: Corrected to Fx = y and Fy = -x
+
+---------------------------------------------
+
