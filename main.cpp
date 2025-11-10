@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 
     // Loads particle names and inital positions from file
