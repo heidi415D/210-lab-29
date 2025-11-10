@@ -25,23 +25,29 @@ using namespace std;
         infile.close();
         }
 
-
     // Display current particle data
     void displayParticles(const map<string, array<list<double>, 3>>& particles) {
         cout << fixed << setprecision(2); // clean formatating
+        cout << "\nParticle Data (showing last known positions):\n";
+        cout << "--------------------------------------------\n";
+        
         int count = 0;
-
         for (const auto& p : particles) {
             cout << left << setw(6) << p.first << ": ("
-                 << setw(8) << p.second[0].back() << ", "
-                 << setw(8) << p.second[1].back() << ", "
-                 << setw(8) << p.second[2].back() << ")";
+                 << setw(7) << p.second[0].back() << ", "
+                 << setw(7) << p.second[1].back() << ", "
+                 << p.second[2].back() << ") ";
             count++;
-                 if (count % 3 == 0) // 3 per line for grid output
-                 cout << "\n"; 
-            }
-            cout << "\n--------------------------------\n";
+
+            if (count % 3 == 0){ // 3 per line for grid output
+            cout << "\n\n"; 
         }
+    }
+
+             if (count % 3 != 0) 
+            cout << "\n\n";
+             
+}
 
 // simulate particle movement in a simple 3D vector field
     void simulateVectorField(map<string, array<list<double>,3>>& particles, int steps, double dt) {
