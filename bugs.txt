@@ -40,5 +40,8 @@ Fix: increased step count to 25
 
 --------------------------------------------------------------------------
 
+Bug #6: Output crammed together
+ Symptom: Particles print immediaatley next to eachother making the tabel unreadable
 
+ Fix:
 
