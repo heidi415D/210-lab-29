@@ -1,0 +1,23 @@
+Bug #1: Display function variable mismatch
+
+Symptom: compiler threw an error - "error: use of undeclared identifier 'p'"
+
+Cause: Inside the displayParticles() function the loop used pair as the iterator varibale 
+but the print statements referred to 'p'
+
+Fix: changed the loop header from: 
+    for (const auto& pair: particles)
+to: for (const auto& p : particles)
+
+--------------------------------------------
+
+Bug #2: Extra braces in timestep loop
+Symptom: Simulation only ran once per particles instead of multiple time steps
+
+Cause: stray pair of braces
+
+Fix: removed the extra braces so that particles updates occur within the time loop
+
+-----------------------------------------------
+
+Bug #3:

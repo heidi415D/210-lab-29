@@ -27,7 +27,7 @@ using namespace std;
 
     // Display current particle data
     void displayParticles(const map<string, array<list<double>, 3>>& particles) {
-        for (const auto& pair : particles) {
+        for (const auto& p : particles) {
             cout << p.first << ": ("
                  << p.second[0].back() << ", "
                  << p.second[1].back() << ", "
@@ -37,7 +37,7 @@ using namespace std;
 
 // simple timestep update - not done yet
     void simulateVectorField(map<string, array<list<double>,3>>& particles, int steps, double dt) {
-        for (int t = 1; t <= steps; ++t) {}
+        for (int t = 1; t <= steps; ++t) {
             for (auto& p : particles) {
                 double x = p.second[0].back();
                 double y = p.second[1].back();
@@ -56,6 +56,7 @@ using namespace std;
                 p.second[1].push_back(y_new);
                 p.second[2].push_back(z_new);
             }
+        }
     }
 
     int main() {
