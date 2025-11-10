@@ -48,7 +48,7 @@ using namespace std;
 
                 double Fx = y;
                 double Fy = -x;
-                double Fz = z;
+                double Fz = sin(z);
 
                 // basic rule 
                 double x_new = x + Fx * dt;
@@ -66,14 +66,27 @@ using namespace std;
         map<string, array<list<double>, 3>> particles;
         loadParticleData(particles, "field_data.txt");
 
+        if (particles.empty()) {
+            cerr << "No particle data loaded. Exiting." << endl;
+            return 1;
+        }
+
         cout << "Initial State:\n";
         displayParticles(particles);
 
-        simulateVectorField(particles, 5, 0.1); 
+        // 25 time steps with dt = 0.1
+        simulateVectorField(particles, 25, 0.1); 
+
         cout << "\nAfter Simulation:\n";
         displayParticles(particles);
 
-        cout << "Simulation complete (mockup)." << endl;
+        cout << "\nSimulating vector field...\n";
+        cout << left << setw(30) << "Total Particles simulated:" << particles.size() << "\n";
+        cout << left << setw(30) << "Time steps completed:" << 25 << "\n";
+        cout << "----------------------------------------\n";
+        cout << "Simulation complete.\n";
+
+        return 0;
     
 }
 

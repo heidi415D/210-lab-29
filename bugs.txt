@@ -34,5 +34,11 @@ Fix: added <iomanip> and used fixed/setprecison(2) so output would not show long
 
 --------------------------------------------------------------------------------
 
-Bug #5: 
+Bug #5: Simulation only ran 5 steps
+
+Fix: increased step count to 25
+
+--------------------------------------------------------------------------
+
+
 
