@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 
     // Loads particle names and inital positions from file
@@ -24,52 +25,79 @@ using namespace std;
         infile.close();
         }
 
-
     // Display current particle data
     void displayParticles(const map<string, array<list<double>, 3>>& particles) {
-        for (const auto& pair : particles) {
-            cout << p.first << ": ("
-                 << p.second[0].back() << ", "
-                 << p.second[1].back() << ", "
-                 << p.second[2].back() << ")" << endl;
-            }
-        }
+        cout << fixed << setprecision(2); // clean formatating
+        cout << "\nParticle Data (showing last known positions):\n";
+        cout << "--------------------------------------------\n";
+        
+        int count = 0;
+        for (const auto& p : particles) {
+            cout << left << setw(6) << p.first << ": ("
+                 << setw(7) << p.second[0].back() << ", "
+                 << setw(7) << p.second[1].back() << ", "
+                 << p.second[2].back() << ") ";
+            count++;
 
-// simple timestep update - not done yet
+            if (count % 3 == 0){ // 3 per line for grid output
+            cout << "\n\n"; 
+        }
+    }
+
+             if (count % 3 != 0) 
+            cout << "\n\n";
+             
+}
+
+// simulate particle movement in a simple 3D vector field
     void simulateVectorField(map<string, array<list<double>,3>>& particles, int steps, double dt) {
-        for (int t = 1; t <= steps; ++t) {}
+        for (int t = 1; t <= steps; ++t) {
             for (auto& p : particles) {
                 double x = p.second[0].back();
                 double y = p.second[1].back();
                 double z = p.second[2].back();
 
-                double Fx = -y;
-                double Fy = x;
-                double Fz = z;
+                double Fx = y;
+                double Fy = -x;
+                double Fz = sin(z);
 
-                //basic rule for alpha version
-                double x_new = x + y * dt;
-                double y_new = y - x * dt;
-                double z_new = z + z * dt;
+                // basic rule 
+                double x_new = x + Fx * dt;
+                double y_new = y + Fy * dt;
+                double z_new = z + Fz * dt;
 
                 p.second[0].push_back(x_new);
                 p.second[1].push_back(y_new);
                 p.second[2].push_back(z_new);
             }
+        }
     }
 
     int main() {
         map<string, array<list<double>, 3>> particles;
         loadParticleData(particles, "field_data.txt");
 
+        if (particles.empty()) {
+            cerr << "No particle data loaded. Exiting." << endl;
+            return 1;
+        }
+
         cout << "Initial State:\n";
         displayParticles(particles);
 
-        simulateVectorField(particles, 5, 0.1); 
+        // 25 time steps with dt = 0.1
+        simulateVectorField(particles, 25, 0.1); 
+
         cout << "\nAfter Simulation:\n";
         displayParticles(particles);
 
-        cout << "Simulation complete (mockup)." << endl;
+        cout << "\nSimulating vector field...\n";
+        cout << left << setw(30) << "Total Particles simulated:" << particles.size() << "\n";
+        cout << left << setw(30) << "Time steps completed:" << 25 << "\n";
+        cout << "----------------------------------------\n";
+        cout << "Simulation complete.\n";
+
+        return 0;
     
 }
 

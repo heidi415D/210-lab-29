@@ -1,0 +1,47 @@
+Bug #1: Display function variable mismatch
+
+Symptom: compiler threw an error - "error: use of undeclared identifier 'p'"
+
+Cause: Inside the displayParticles() function the loop used pair as the iterator varibale 
+but the print statements referred to 'p'
+
+Fix: changed the loop header from: 
+    for (const auto& pair: particles)
+to: for (const auto& p : particles)
+
+--------------------------------------------
+
+Bug #2: Extra braces in timestep loop
+Symptom: Simulation only ran once per particles instead of multiple time steps
+
+Cause: stray pair of braces
+
+Fix: removed the extra braces so that particles updates occur within the time loop
+
+-----------------------------------------------
+
+Bug #3: Incorrect Fx/Fy sign direciton
+
+Symptom: Particles rotated opposide of motion I wanted
+
+Fix: Fixed to Fx = y and Fy = -x
+
+---------------------------------------------
+
+Bug #4: Missing <iomanip> header
+
+Fix: added <iomanip> and used fixed/setprecison(2) so output would not show long floating-point numbers
+
+--------------------------------------------------------------------------------
+
+Bug #5: Simulation only ran 5 steps
+
+Fix: increased step count to 25
+
+--------------------------------------------------------------------------
+
+Bug #6: Output crammed together
+ Symptom: Particles print immediaatley next to eachother making the tabel unreadable
+
+ Fix:
+
